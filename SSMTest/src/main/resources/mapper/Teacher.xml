@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwhzzz.dao.TeacherDao">
+
+  <select id="findTeacherByName" parameterType="String" resultType="Teacher">
+    select * from teacher where username = #{username}
+  </select>
+
+  <select id="findAll" resultType="Teacher">
+    select * from teacher
+  </select>
+
+  <select id="get_Teacher_List" parameterType="Map" resultType="Teacher">
+    select * from teacher where 1=1
+    <if test="username != null">
+      and username like #{username}
+    </if>
+    <if test="clazzId != null">
+     and clazzId = #{clazzId}
+    </if>
+</select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from stu where 1=1
+    <if test="username != null">
+      and name like #{name}
+    </if>
+    <if test="clazzId != null">
+      and clazzId = #{clazzId}
+    </if>
+
+  </select>
+
+  <insert id="insertTeacher" parameterType="Teacher">
+    insert into teacher(id,clazzId,username,gender,tno,password,email,telephone,address) values(null,#{clazzId},#{username},#{gender},#{tno},#{password},#{email},#{telephone},#{address})
+  </insert>
+
+  <update id="updateTeacher" parameterType="Teacher">
+    update teacher set clazzId = #{clazzId},username = #{username},gender=#{gender},email=#{email},telephone=#{telephone},address=#{address} where id=#{id}
+  </update>
+
+  <delete id="deleteTeacher" parameterType="String">
+    delete from teacher where id in (${value})
+  </delete>
+
+  <update id="updatePassword" parameterType="Teacher">
+    update teacher set password = #{password} where id = #{id}
+  </update>
+
+</mapper>

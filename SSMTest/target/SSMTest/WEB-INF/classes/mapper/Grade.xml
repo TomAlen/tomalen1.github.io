@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwhzzz.dao.GradeDao">
+
+  <select id="findGradeByName" parameterType="String" resultType="Grade">
+    select * from Grade where name = #{name}
+  </select>
+
+  <select id="findAll" resultType="Grade">
+    select * from Grade
+  </select>
+
+  <select id="get_Grade_List" parameterType="Map" resultType="Grade">
+    select * from Grade where name like #{name} limit #{offset},#{pageSize}
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from Grade where name like #{name}
+  </select>
+
+  <insert id="insertGrade" parameterType="Grade">
+    insert into Grade(id,name,manager,email,telephone,introducation) values(null,#{name},#{manager},#{email},#{telephone},#{introducation})
+  </insert>
+
+  <update id="updateGrade" parameterType="Grade">
+    update Grade set name = #{name},manager = #{manager},email=#{email},telephone=#{telephone},introducation=#{introducation} where id=#{id}
+  </update>
+
+  <delete id="deleteGrade" parameterType="String">
+    delete from Grade where id in (${value})
+  </delete>
+
+
+</mapper>
