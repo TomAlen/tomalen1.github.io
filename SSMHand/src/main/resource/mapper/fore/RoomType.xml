@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.fore.RoomTypeDao">
+  <select id="findRoomTypeByName" parameterType="String" resultType="RoomType">
+    select * from roomtype where name = #{name}
+  </select>
+
+  <select id="findById" parameterType="Integer" resultType="RoomType">
+    select * from roomtype where id = #{value}
+  </select>
+
+  <select id="getRoomTypeList" parameterType="Map" resultType="RoomType">
+    select * from roomtype where 1 = 1
+    <if test="name != null">
+    and name like  '%${name}%'
+    </if>
+    <if test="status != null">
+    and status = #{status}
+    </if>
+    <if test="offset != null and pageSize != null">
+    limit #{offset},#{pageSize}
+    </if>
+  </select>
+
+  <select id="getList" resultType="RoomType">
+    select * from roomtype
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from roomtype where 1 = 1
+    <if test="name != null">
+      and name like  '%${name}%'
+    </if>
+    <if test="status != null">
+      and status = #{status}
+    </if>
+  </select>
+
+  <insert id="insertRoomType" parameterType="RoomType">
+    insert into roomtype(id,name,photo,price,liveNum,bedNum,roomNum,avilableNum,bookNum,livedNum,status,remark) values(null,#{name},#{photo},#{price},#{liveNum},#{bedNum},#{roomNum},#{avilableNum},#{bookNum},#{livedNum},#{status},#{remark})
+  </insert>
+
+  <update id="updateRoomType" parameterType="RoomType">
+    update roomtype set name = #{name},photo=#{photo},price=#{price},liveNum=#{liveNum},bedNum=#{bedNum},roomNum = #{roomNum},avilableNum=#{avilableNum},status=#{status},remark=#{remark} where id=#{id}
+  </update>
+
+  <delete id="deleteRoomType" parameterType="Integer">
+    delete from roomtype where id = #{id}
+  </delete>
+
+  <update id="updateNum" parameterType="RoomType">
+    update roomtype set avilableNum=#{avilableNum},bookNum=#{bookNum},livedNum=#{livedNum} where id = #{id}
+  </update>
+
+  <update id="updateStatus" parameterType="int">
+    update roomtype set status = #{status} where id = #{id}
+  </update>
+</mapper>

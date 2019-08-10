@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.CheckinDao">
+  <select id="findBookOrderByName" parameterType="String" resultType="Checkin">
+    select * from checkinn where name = #{name}
+  </select>
+
+  <select id="findById" parameterType="Integer" resultType="Checkin">
+    select * from checkinn where id = #{value}
+  </select>
+
+  <select id="getCheckinList" parameterType="Map" resultType="Checkin">
+    select * from checkinn where 1 = 1
+    <if test="name != null">
+    and name like  '%${name}%'
+    </if>
+    <if test="idCard  != null">
+      and idCard like  '%${idCard}%'
+    </if>
+    <if test="mobile != null">
+      and mobile like  '%${mobile}%'
+    </if>
+    <if test="roomId != null">
+      and roomId = #{roomId}
+    </if>
+    <if test="roomTypeId != null">
+      and roomTypeId = #{roomTypeId}
+    </if>
+    <if test="status != null">
+    and status = #{status}
+    </if>
+    <if test="offset != null and pageSize != null">
+    limit #{offset},#{pageSize}
+    </if>
+  </select>
+
+  <select id="getList" resultType="Checkin">
+    select * from checkinn where status = 1
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from checkinn where 1 = 1
+    <if test="name != null">
+      and name like  '%${name}%'
+    </if>
+    <if test="idCard  != null">
+      and idCard like  '%${idCard}%'
+    </if>
+    <if test="mobile != null">
+      and mobile like  '%${mobile}%'
+    </if>
+    <if test="accountId != null">
+      and accountId = #{accountId}
+    </if>
+    <if test="roomTypeId != null">
+      and roomTypeId = #{roomTypeId}
+    </if>
+    <if test="status != null">
+      and status = #{status}
+    </if>
+  </select>
+
+  <insert id="insertCheckin" parameterType="Checkin">
+    insert into checkinn(id,roomId,checkinPrice,roomTypeId,name,realName,idCard,mobile,status,arriveTime,leaveTime,createTime,bookOrderId,remark) values(null,#{roomId},#{checkinPrice},#{roomTypeId},#{name},#{realName},#{idCard},#{mobile},#{status},#{arriveTime},#{leaveTime},#{createTime},#{bookOrderId},#{remark})
+</insert>
+
+  <update id="updateCheckin" parameterType="Checkin">
+    update checkinn set roomId=#{roomId},checkinPrice=#{checkinPrice},roomTypeId=#{roomTypeId},name = #{name},realName=#{realName},idCard=#{idCard},mobile=#{mobile},status = #{status},arriveTime=#{arriveTime},leaveTime=#{leaveTime},remark=#{remark} where id=#{id}
+  </update>
+
+  <delete id="deleteCheckin" parameterType="Integer">
+    delete from checkinn where id = #{id}
+  </delete>
+
+  <!--按日统计-->
+  <select id="getStatsByDay" resultType="Map">
+    SELECT sum(checkinPrice) as money, DATE_FORMAT(createTime,'%Y-%m-%d') as stat_date from checkinn GROUP BY DATE_FORMAT(createTime,'%Y-%m-%d');
+  </select>
+
+  <!--按月统计-->
+  <select id="getStatsByMonth" resultType="Map">
+    SELECT sum(checkinPrice) as money, DATE_FORMAT(createTime,'%Y-%m') as stat_date from checkinn GROUP BY DATE_FORMAT(createTime,'%Y-%m');
+  </select>
+</mapper>

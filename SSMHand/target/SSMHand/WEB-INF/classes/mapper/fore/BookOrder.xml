@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.fore.BookOrderDao">
+  <select id="findBookOrderByName" parameterType="String" resultType="BookOrder">
+    select * from book_order where name = #{name}
+  </select>
+
+  <select id="findById" parameterType="Integer" resultType="BookOrder">
+    select * from book_order where id = #{value}
+  </select>
+
+  <select id="getBookOrderList" parameterType="Map" resultType="BookOrder">
+    select * from book_order where 1 = 1
+    <if test="name != null">
+    and name like  '%${name}%'
+    </if>
+    <if test="idCard  != null">
+      and idCard like  '%${idCard}%'
+    </if>
+    <if test="mobile != null">
+      and mobile like  '%${mobile}%'
+    </if>
+    <if test="accountId != null">
+      and accountId = #{accountId}
+    </if>
+    <if test="roomTypeId != null">
+      and roomTypeId = #{roomTypeId}
+    </if>
+    <if test="status != null">
+    and status = #{status}
+    </if>
+    <if test="offset != null and pageSize != null">
+    limit #{offset},#{pageSize}
+    </if>
+  </select>
+
+  <select id="getList" resultType="BookOrder">
+    select * from book_order where status = 1
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from book_order where 1 = 1
+    <if test="name != null">
+      and name like  '%${name}%'
+    </if>
+    <if test="idCard  != null">
+      and idCard like  '%${idCard}%'
+    </if>
+    <if test="mobile != null">
+      and mobile like  '%${mobile}%'
+    </if>
+    <if test="accountId != null">
+      and accountId = #{accountId}
+    </if>
+    <if test="roomTypeId != null">
+      and roomTypeId = #{roomTypeId}
+    </if>
+    <if test="status != null">
+      and status = #{status}
+    </if>
+  </select>
+
+  <insert id="insertBookOrder" parameterType="BookOrder">
+    insert into book_order(id,accountId,roomTypeId,name,realName,idCard,mobile,status,arriveTime,leaveTime,createTime,remark) values(null,#{accountId},#{roomTypeId},#{name},#{realName},#{idCard},#{mobile},#{status},#{arriveTime},#{leaveTime},#{createTime},#{remark})
+</insert>
+
+  <update id="updateBookOrder" parameterType="BookOrder">
+    update book_order set accountId=#{accountId},roomTypeId=#{roomTypeId},name = #{name},realName=#{realName},idCard=#{idCard},mobile=#{mobile},status = #{status},arriveTime=#{arriveTime},leaveTime=#{leaveTime},remark=#{remark} where id=#{id}
+  </update>
+
+  <delete id="deleteBookOrder" parameterType="Integer">
+    delete from book_order where id = #{id}
+  </delete>
+</mapper>

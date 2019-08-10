@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.MenuDao">
+  <select id="findByMenuname" parameterType="String" resultType="Menu">
+    select * from menu where name = #{name}
+  </select>
+
+  <!--获取顶级菜单信息-->
+  <select id="findTopList" resultType="Menu">
+    select *  from menu where parentId = 0
+  </select>
+
+  <!--获取菜单信息-->
+  <select id="get_Menu_List" parameterType="Map" resultType="Menu">
+    select * from menu where 1 = 1
+    <if test="parentId != null">
+      and parentId #{parentId}
+    </if>
+    <if test="name != null">
+      and name  like #{name}
+    </if>
+    limit #{offset},#{pageSize}
+  </select>
+
+  <!--获取整数-->
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from menu where 1=1
+    <if test="parentId != null">
+      and parentId #{parentId}
+    </if>
+    <if test="name != null">
+      and name  like #{name}
+    </if>
+  </select>
+  <select id="findParentById" parameterType="Integer" resultType="Integer">
+    select parentId from menu where id = #{id}
+  </select>
+
+  <!--获取某一分类的子菜单信息-->
+  <select id="findChildernList" parameterType="Integer" resultType="Menu">
+    select * from menu where parentId = #{parentId}
+  </select>
+
+  <insert id="insertMenu" parameterType="Menu">
+    insert into menu(id,parentId,name,url,icon) values(null,#{parentId},#{name},#{url},#{icon})
+  </insert>
+
+  <update id="updateMenu" parameterType="Menu">
+    update menu set parentId = #{parentId},name = #{name},url = #{url},icon = #{icon} where id=#{id}
+  </update>
+
+  <delete id="deleteId" parameterType="Integer">
+    delete from menu where id = #{id}
+  </delete>
+
+  <update id="updatePassword" parameterType="User">
+    update menu set password = #{password} where id= #{id}
+  </update>
+
+  <select id="findByMenuList" parameterType="String" resultType="Menu">
+    select * from menu where id in (${value})
+  </select>
+</mapper>

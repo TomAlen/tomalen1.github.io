@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.FloorDao">
+  <select id="findFloorByName" parameterType="String" resultType="Floor">
+    select * from floor where username = #{username}
+  </select>
+
+  <select id="getFloorList" parameterType="Map" resultType="Floor">
+    select * from floor where 1 = 1
+    <if test="name != null">
+    and name like  '%${name}%'
+    </if>
+    <if test="offset != null and pageSize != null">
+    limit #{offset},#{pageSize}
+    </if>
+  </select>
+
+  <select id="getListAll" resultType="Floor">
+    select * from floor
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from floor where name like '%${name}%'
+  </select>
+
+  <insert id="insertFloor" parameterType="Floor">
+    insert into floor(id,name,remark) values(null,#{name},#{remark})
+  </insert>
+
+  <update id="updateFloor" parameterType="Floor">
+    update floor set name = #{name},remark=#{remark} where id=#{id}
+  </update>
+
+  <delete id="deleteFloor" parameterType="Integer">
+    delete from floor where id = #{id}
+  </delete>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.LogDao">
+  <select id="getList" parameterType="Map" resultType="Log">
+    select * from log where 1 = 1
+    <if test="content != null">
+    and content like  '%${content}%'
+    </if>
+
+    <if test="offset !=null and pageSize != null">
+     limit #{offset},#{pageSize}
+    </if>
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from log where content like '%${content}%'
+  </select>
+
+  <insert id="insertLog" parameterType="Log">
+    insert into log(id,content,createTime) values(null,#{content},#{createTime})
+  </insert>
+
+  <delete id="deleteLog" parameterType="String">
+    delete from log where id in (${value})
+  </delete>
+
+</mapper>

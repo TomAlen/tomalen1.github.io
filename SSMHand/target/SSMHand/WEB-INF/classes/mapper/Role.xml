@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.RoleDao">
+  <select id="findByRolename" parameterType="String" resultType="Role">
+    select * from role where name = #{name}
+  </select>
+
+  <!--根据id查询role-->
+  <select id="findById" parameterType="Integer" resultType="Role">
+    select * from role where id = #{id}
+  </select>
+
+  <!--获取顶级菜单信息-->
+  <select id="findTopList" resultType="Role">
+    select *  from role where parentId = 0
+  </select>
+
+  <!--获取菜单信息-->
+  <select id="get_Role_List" parameterType="Map" resultType="Role">
+    select * from role where 1=1
+    <if test="name != null">
+      and name like #{name}
+    </if>
+    limit #{offset},#{pageSize}
+  </select>
+
+  <select id="findList" resultType="Role">
+    select * from role
+  </select>
+
+  <!--获取整数-->
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from role where 1=1
+    <if test="name != null">
+      and name  like #{name}
+    </if>
+  </select>
+
+  <insert id="insertRole" parameterType="Role">
+    insert into role(id,name,remark) values(null,#{name},#{remark})
+  </insert>
+
+  <update id="updateRole" parameterType="Role">
+    update role set name = #{name},remark = #{remark} where id=#{id}
+  </update>
+
+  <delete id="deleteId" parameterType="Integer">
+    delete from role where id = #{id}
+  </delete>
+</mapper>

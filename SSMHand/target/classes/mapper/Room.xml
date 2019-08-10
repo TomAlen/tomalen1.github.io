@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.RoomDao">
+
+  <select id="getRoomBySn" parameterType="String" resultType="Room">
+    select * from room where sn = #{sn}
+  </select>
+
+  <select id="getRoomById" parameterType="Integer" resultType="Room">
+    select * from room where id = #{value}
+  </select>
+
+  <select id="getRoomList" parameterType="Map" resultType="Room">
+    select * from room where 1 = 1
+    <if test="sn != null">
+    and sn like  '%${sn}%'
+    </if>
+    <if test="roomTypeId != null">
+      and roomTypeId = #{roomTypeId}
+    </if>
+    <if test="floorId != null">
+      and floorId = #{floorId}
+    </if>
+    <if test="status != null">
+    and status = #{status}
+    </if>
+    <if test="offset != null and pageSize != null">
+     limit #{offset},#{pageSize}
+    </if>
+  </select>
+
+  <select id="getListAll" resultType="Room">
+    select * from room
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from room where 1 = 1
+    <if test="sn != null">
+      and sn like  '%${sn}%'
+    </if>
+    <if test="roomTypeId != null">
+      and roomTypeId = #{roomTypeId}
+    </if>
+    <if test="floorId != null">
+      and floorId = #{floorId}
+    </if>
+    <if test="status != null">
+      and status = #{status}
+    </if>
+  </select>
+
+  <insert id="insertRoom" parameterType="Room">
+    insert into room(id,sn,photo,roomTypeId,floorId,status,remark) values(null,#{sn},#{photo},#{roomTypeId},#{floorId},#{status},#{remark})
+  </insert>
+
+  <update id="updateRoom" parameterType="Room">
+    update room set sn = #{sn},photo = #{photo},roomTypeId=#{roomTypeId},floorId=#{floorId},status=#{status},remark=#{remark} where id=#{id}
+  </update>
+
+  <delete id="deleteRoom" parameterType="Integer">
+    delete from room where id = #{id}
+  </delete>
+
+  <select id="getList" resultType="Room">
+    select * from room where status = 0
+  </select>
+</mapper>

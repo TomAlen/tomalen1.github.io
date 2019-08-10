@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwh.dao.UserDao">
+  <select id="findByUsername" parameterType="String" resultType="User">
+    select * from yonghu where username = #{username}
+  </select>
+
+  <select id="getUserList" parameterType="Map" resultType="User">
+    select * from yonghu where 1 = 1
+    <if test="username != null">
+    and username like  '%${username}%'
+    </if>
+    <if test="role != null">
+    and role = #{role}
+    </if>
+    <if test="gender != null">
+    and gender = #{gender}
+    </if>
+    limit #{offset},#{pageSize}
+  </select>
+
+  <select id="getCount" parameterType="Map" resultType="Integer">
+    select count(id) from yonghu where username like '%${username}%'
+  </select>
+
+  <insert id="insertUser" parameterType="User">
+    insert into yonghu(id,username,password,role,gender,age,email,address,photo) values(null,#{username},#{password},#{role},#{gender},#{age},#{email},#{address},#{photo})
+  </insert>
+
+  <update id="updateUser" parameterType="User">
+    update yonghu set username = #{username},role=#{role},gender = #{gender},age=#{age},email=#{email},address=#{address},photo=#{photo} where id=#{id}
+  </update>
+
+  <delete id="deleteUser" parameterType="String">
+    delete from yonghu where id in (${value})
+  </delete>
+
+  <update id="editPassword" parameterType="User">
+    update yonghu set password = #{password} where id= #{id}
+  </update>
+</mapper>
