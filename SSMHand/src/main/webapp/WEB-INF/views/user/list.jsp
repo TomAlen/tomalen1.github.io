@@ -381,7 +381,7 @@
 	$('#data-datagrid').datagrid({
 		url:'list?t='+new Date().getTime(),
 		rownumbers:true,
-		singleSelect:false,
+		singleSelect:true,
 		pageSize:20,           
 		pagination:true,
 		multiSort:true,

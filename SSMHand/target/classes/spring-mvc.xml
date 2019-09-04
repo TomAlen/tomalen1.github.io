@@ -20,12 +20,12 @@
     <mvc:annotation-driven/>
 
     <!--对静态资源的映射路径-->
-    <!--jquery文件映射-->
+  <!--  &lt;!&ndash;jquery文件映射&ndash;&gt;
     <mvc:resources mapping="/js/**" location="/WEB-INF/statics/js/"/>
-    <!--bootstrap文件的映射-->
+    &lt;!&ndash;bootstrap文件的映射&ndash;&gt;
     <mvc:resources mapping="/css/**" location="/WEB-INF/statics/css/"/>
-    <!--图片的静态资源-->
-    <mvc:resources mapping="/image/**" location="/WEB-INF/statics/image/"/>
+    &lt;!&ndash;图片的静态资源&ndash;&gt;
+    <mvc:resources mapping="/image/**" location="/WEB-INF/statics/image/"/>-->
     <!--easyUI的资源-->
     <mvc:resources mapping="/easyui/**" location="/WEB-INF/statics/easyui/"/>
     <!--h-ui的资源-->

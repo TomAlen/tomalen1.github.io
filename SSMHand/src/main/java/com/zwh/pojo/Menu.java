@@ -2,12 +2,14 @@ package com.zwh.pojo;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * 菜单实体类
  */
 
 @Component
-public class Menu {
+public class Menu implements Serializable {
 
     private Integer id;
     private String name;
@@ -57,6 +59,7 @@ public class Menu {
     public void setIcon(String icon) {
         this.icon = icon;
     }
+
     public Integer get_parentId() {
         _parentId = parentId;
         return _parentId;

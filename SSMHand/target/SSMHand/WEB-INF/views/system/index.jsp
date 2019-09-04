@@ -29,7 +29,7 @@
 </head>
 <body class="easyui-layout">
 <div id="loading" style="position:absolute;z-index:1000;top:0px;left:0px;width:100%;height:100%;background:#FFFFFF;text-align :center;padding-top:6%;">
-     <img src="/easyui/images/loading.jpg" width="50%">
+     <img src="/easyui/images/loading.jpg" width="30%">
 </div> 
 	<!-- begin of header -->
 	<div class="wu-header" data-options="region:'north',border:false,split:true">
@@ -38,25 +38,12 @@
         </div>
         <div class="wu-header-right">
         	<p><strong class="easyui-tooltip" title="0条未读消息">${role.name}:${admin.username}</strong>，欢迎您！</p>
-            <p><a href="#">网站首页</a>|<a href="#">支持论坛</a>|<a href="#">帮助中心</a>|<a href="logout">安全退出</a></p>
+            <p><a href="https://www.zwhzzz.top">个人网站</a>|<a href="logout">安全退出</a></p>
         </div>
     </div>
     <!-- end of header -->
     <!-- begin of sidebar -->
-	<div class="wu-sidebar" data-options="region:'west',split:true,border:true,title:'导航菜单'"> 
-    	<%--<div class="easyui-accordion" data-options="border:false,fit:true">
-        	<c:forEach items="${topMenuList }" var="topMenu">
-        	<div title="${topMenu.name }" data-options="iconCls:'${topMenu.icon }'" style="padding:5px;">  	
-    			<ul class="easyui-tree wu-side-tree">
-                	<c:forEach items="${secondMenuList }" var="secondMenu">
-                		<c:if test="${secondMenu.parentId == topMenu.id }">
-                			<li iconCls="${secondMenu.icon }"><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="${secondMenu.url }?_mid=${secondMenu.id }" iframe="1">${secondMenu.name }</a></li>
-                    	</c:if>
-                    </c:forEach>
-                </ul>
-            </div>
-            </c:forEach>
-        </div>--%>
+	<div class="wu-sidebar" data-options="region:'west',split:true,border:true,title:'导航菜单'">
         <div class="easyui-accordion" data-options="border:false,fit:true">
             <c:forEach items="${topMenuList}" var="topMenu">
             <div title="${topMenu.name}" data-options="iconCls:'${topMenu.icon}'" style="padding:5px;">
@@ -69,18 +56,6 @@
                 </ul>
             </div>
             </c:forEach>
-
-           <%-- <div title="用户设置" data-options="iconCls:'icon-wrench'" style="padding:5px;">
-                <ul class="easyui-tree wu-side-tree">
-                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-users" data-link="../admin/user/list" iframe="1">用户管理</a></li>
-                </ul>
-            </div>
-            <div title="系统设置" data-options="iconCls:'icon-wrench'" style="padding:5px;">
-                <ul class="easyui-tree wu-side-tree">
-                    <li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="../admin/menu/list" iframe="1">菜单管理</a></li>
-                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-users" data-link="../admin/role/list" iframe="1">角色管理</a></li>
-                </ul>
-            </div>--%>
         </div>
     </div>	
     <!-- end of sidebar -->    

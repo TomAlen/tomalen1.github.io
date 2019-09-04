@@ -97,6 +97,10 @@ public class AccountController {
             result.put("msg","客户用户名已存在！");
             return result;
         }
+        if(account.getRealname().length() > 5) {
+            result.put("success","false");
+            result.put("msg","姓名的长度必须小于5位！");
+        }
 
         if(accountService.insertAccount(account) > 0) {
             result.put("success",false);
@@ -143,6 +147,12 @@ public class AccountController {
         return result;
     }
 
+    /**
+     * 删除客户
+     * @param id  客户id
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> deleteAccount(Integer id,HttpServletRequest request) {

@@ -34,9 +34,7 @@
       <li><img src="/home/images\s_02.png" alt=""></li>
       <li><img src="/home/images\s_01.png" alt=""></li>
     </ul>
-    
   </div>
-
 
   <!---->
   <!---预订菜单--->

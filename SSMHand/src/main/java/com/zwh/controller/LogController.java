@@ -24,7 +24,7 @@ public class LogController {
     private LogDao logDao;
 
     /**
-     * 舔砖到日志管理页面
+     * 跳转到日志管理页面
      * @param model
      * @return
      */

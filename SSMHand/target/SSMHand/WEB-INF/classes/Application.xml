@@ -3,13 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/tx
-         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <!--扫描service包下的所有注解-->
     <context:component-scan base-package="com.zwh.service,com.zwh.pojo"/>
@@ -22,11 +21,11 @@
         <!-- 指定连接数据库的驱动 -->
         <property name="driverClass" value="com.mysql.jdbc.Driver" />
         <!-- 指定连接数据库的URL -->
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssmhand" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/SSMHotel" />
         <!-- 指定连接数据库的用户名 -->
         <property name="user" value="root" />
         <!-- 指定连接数据库的密码 -->
-        <property name="password" value="root" />
+        <property name="password" value="123" />
         <!-- 指定连接数据库连接池的最大连接数 -->
         <property name="maxPoolSize" value="10" />
         <!-- 指定连接数据库连接池的最小连接数 -->

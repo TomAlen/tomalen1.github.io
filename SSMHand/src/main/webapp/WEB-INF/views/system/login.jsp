@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- saved from url=(0051)http://demo1.mycodes.net/denglu/HTML5_yonghudenglu/ -->
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,13 +40,16 @@
 					<img id="cpacha-img" title="点击切换验证码" style="cursor:pointer;" src="get_cpacha?vl=4&w=150&h=40&type=loginCpacha" width="110px" height="30px" onclick="changeCpacha()">
 				</div>
 			</div>
+
 			<div class="login-button">
 				登录
 			</div>
-			<div class="reg" align="right">
+
+			<div style="float: right;margin: 0 auto;margin-top: 30px;margin-right: 20px;">
 				<a href="/home/login">立即登录前台页面 &gt;&gt;</a>
 			</div>
 		</div>
+
 
 
 		<div class="sk-rotating-plane"></div>

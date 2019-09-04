@@ -211,7 +211,7 @@ public class UserController {
             result.put("msg","文件类型必须为jpg,jpeg,gif,png！");
             return result;
         }
-        String savePath = request.getServletContext().getRealPath("/") + "\\upload\\";
+        String savePath = request.getServletContext().getRealPath("/") + "/upload/";
         File savePathFile = new File(savePath);
         //如果文件不存在就创建文件目录
         if(!savePathFile.exists()) {
@@ -222,7 +222,6 @@ public class UserController {
         photo.transferTo(new File(savePath  + fileName));
         result.put("success",true);
         result.put("filepath",request.getServletContext().getContextPath()  + "/upload/" + fileName);
-        //System.out.println("request.getServletContext().getContextPath() =" + request.getServletContext().getContextPath());
         return result;
     }
 
